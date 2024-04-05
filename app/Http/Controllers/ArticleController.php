@@ -62,7 +62,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        Gate::authorize('update', $article, [self::class]);
+        $this->authorize('update', [self::class, $article]);
         return view('article.edit',['article'=>$article]);
     }
 
@@ -89,7 +89,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        Gate::authorize('delete', $article, [self::class]);
+        Gate::authorize('delete', [self::class, $article]);
         return redirect()->route('article.index');
     }
 }
